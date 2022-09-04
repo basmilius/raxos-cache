@@ -17,10 +17,11 @@
     },
     "config": {
         "platform": {
-            "php": "8.0"
+            "php": "8.1"
         }
     },
     "require": {
+        "ext-redis": "*",
         "jetbrains/phpstorm-attributes": "^1.0",
         "raxos/foundation": "*"
     }
