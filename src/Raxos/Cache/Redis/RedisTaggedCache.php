@@ -61,7 +61,7 @@ readonly class RedisTaggedCache implements RedisTaggedCacheInterface
      */
     public function del(string ...$keys): bool
     {
-        $keys = array_map(fn(string $key) => $this->key($key), $keys);
+        $keys = array_map($this->key(...), $keys);
 
         return $this->redis->del(...$keys);
     }
