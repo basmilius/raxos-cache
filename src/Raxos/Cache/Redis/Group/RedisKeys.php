@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Raxos\Cache\Redis\Group;
 
+use Raxos\Cache\Redis\{RedisCacheException, RedisUtil};
 use Redis;
 
 /**
@@ -23,12 +24,14 @@ trait RedisKeys
      * @param string ...$keys
      *
      * @return bool
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::del()
      */
     public function del(string ...$keys): bool
     {
-        return $this->connection->del($keys) > 0;
+        return RedisUtil::wrap($this->connection->del(...), $keys) > 0;
     }
 
     /**
@@ -37,12 +40,14 @@ trait RedisKeys
      * @param string $key
      *
      * @return string|null
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::dump()
      */
     public function dump(string $key): ?string
     {
-        return $this->connection->dump($key) ?: null;
+        return RedisUtil::wrap($this->connection->dump(...), $key) ?: null;
     }
 
     /**
@@ -51,12 +56,14 @@ trait RedisKeys
      * @param string $key
      *
      * @return bool
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::exists()
      */
     public function exists(string $key): bool
     {
-        return $this->connection->exists($key) > 0;
+        return RedisUtil::wrap($this->connection->exists(...), $key) > 0;
     }
 
     /**
@@ -66,12 +73,14 @@ trait RedisKeys
      * @param int $seconds
      *
      * @return bool
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::expire()
      */
     public function expire(string $key, int $seconds = 0): bool
     {
-        return $this->connection->expire($key, $seconds);
+        return RedisUtil::wrap($this->connection->exists(...), $key, $seconds);
     }
 
     /**
@@ -81,12 +90,14 @@ trait RedisKeys
      * @param int $unixTimestamp
      *
      * @return bool
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::expireAt()
      */
     public function expireAt(string $key, int $unixTimestamp): bool
     {
-        return $this->connection->expireAt($key, $unixTimestamp);
+        return RedisUtil::wrap($this->connection->expireAt(...), $key, $unixTimestamp);
     }
 
     /**
@@ -96,12 +107,14 @@ trait RedisKeys
      * @param string $pattern
      *
      * @return string[]
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::keys()
      */
     public function keys(string $pattern = '*'): array
     {
-        return $this->connection->keys($pattern);
+        return RedisUtil::wrap($this->connection->keys(...), $pattern);
     }
 
     /**
@@ -116,12 +129,14 @@ trait RedisKeys
      * @param bool $replace
      *
      * @return bool
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::migrate()
      */
     public function migrate(string $host, int $port, string $key, int $database, float $timeout, bool $copy = false, bool $replace = false): bool
     {
-        return $this->connection->migrate($host, $port, $key, $database, $timeout, $copy, $replace);
+        return RedisUtil::wrap($this->connection->migrate(...), $host, $port, $key, $database, $timeout, $copy, $replace);
     }
 
     /**
@@ -131,12 +146,14 @@ trait RedisKeys
      * @param int $database
      *
      * @return bool
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::move()
      */
     public function move(string $key, int $database): bool
     {
-        return $this->connection->move($key, $database);
+        return RedisUtil::wrap($this->connection->move(...), $key, $database);
     }
 
     /**
@@ -146,12 +163,14 @@ trait RedisKeys
      * @param string $key
      *
      * @return bool|int|string
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::object()
      */
     public function object(string $command, string $key): bool|int|string
     {
-        return $this->connection->object($command, $key);
+        return RedisUtil::wrap($this->connection->object(...), $command, $key);
     }
 
     /**
@@ -160,12 +179,14 @@ trait RedisKeys
      * @param string $key
      *
      * @return bool
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::persist()
      */
     public function persist(string $key): bool
     {
-        return $this->connection->persist($key);
+        return RedisUtil::wrap($this->connection->persist(...), $key);
     }
 
     /**
@@ -175,12 +196,15 @@ trait RedisKeys
      * @param int $milliseconds
      *
      * @return bool
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::pExpire()
+     * @noinspection SpellCheckingInspection
      */
     public function pexpire(string $key, int $milliseconds): bool
     {
-        return $this->connection->pExpire($key, $milliseconds);
+        return RedisUtil::wrap($this->connection->pExpire(...), $key, $milliseconds);
     }
 
     /**
@@ -190,12 +214,15 @@ trait RedisKeys
      * @param $unixTimestampMs
      *
      * @return bool
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::pExpireAt()
+     * @noinspection SpellCheckingInspection
      */
     public function pexpireat(string $key, $unixTimestampMs): bool
     {
-        return $this->connection->pExpireAt($key, $unixTimestampMs);
+        return RedisUtil::wrap($this->connection->pExpireAt(...), $key, $unixTimestampMs);
     }
 
     /**
@@ -204,24 +231,30 @@ trait RedisKeys
      * @param string $key
      *
      * @return int|null
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::pttl()
+     * @noinspection SpellCheckingInspection
      */
     public function pttl(string $key): ?int
     {
-        return $this->connection->pttl($key) ?: null;
+        return RedisUtil::wrap($this->connection->pttl(...), $key) ?: null;
     }
 
     /**
      * Returns a random key from the keyspace.
      *
      * @return string
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::randomKey()
+     * @noinspection SpellCheckingInspection
      */
     public function randomkey(): string
     {
-        return $this->connection->randomKey();
+        return RedisUtil::wrap($this->connection->randomKey(...));
     }
 
     /**
@@ -231,12 +264,14 @@ trait RedisKeys
      * @param string $newKey
      *
      * @return bool
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::rename()
      */
     public function rename(string $key, string $newKey): bool
     {
-        return $this->connection->rename($key, $newKey);
+        return RedisUtil::wrap($this->connection->rename(...), $key, $newKey);
     }
 
     /**
@@ -246,12 +281,15 @@ trait RedisKeys
      * @param string $newKey
      *
      * @return bool
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::renameNx()
+     * @noinspection SpellCheckingInspection
      */
     public function renamenx(string $key, string $newKey): bool
     {
-        return $this->connection->renameNx($key, $newKey);
+        return RedisUtil::wrap($this->connection->renameNx(...), $key, $newKey);
     }
 
     /**
@@ -263,12 +301,14 @@ trait RedisKeys
      * @param string $serialized
      *
      * @return bool
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::restore()
      */
     public function restore(string $key, int $ttl, string $serialized): bool
     {
-        return $this->connection->restore($key, $ttl, $serialized);
+        return RedisUtil::wrap($this->connection->restore(...), $key, $ttl, $serialized);
     }
 
     /**
@@ -278,12 +318,14 @@ trait RedisKeys
      * @param array|null $options
      *
      * @return array
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::sort()
      */
     public function sort(string $key, ?array $options = null): array
     {
-        return $this->connection->sort($key, $options);
+        return RedisUtil::wrap($this->connection->sort(...), $key, $options);
     }
 
     /**
@@ -292,12 +334,14 @@ trait RedisKeys
      * @param string ...$keys
      *
      * @return bool
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::rawCommand()
      */
     public function touch(string ...$keys): bool
     {
-        return $this->connection->rawCommand('TOUCH', $keys) > 0;
+        return RedisUtil::wrap($this->connection->rawCommand(...), 'TOUCH', $keys) > 0;
     }
 
     /**
@@ -306,12 +350,14 @@ trait RedisKeys
      * @param string $key
      *
      * @return int
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::ttl()
      */
     public function ttl(string $key): int
     {
-        return $this->connection->ttl($key);
+        return RedisUtil::wrap($this->connection->ttl(...), $key);
     }
 
     /**
@@ -320,27 +366,31 @@ trait RedisKeys
      * @param string $key
      *
      * @return int
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::type()
      */
     public function type(string $key): int
     {
-        return $this->connection->type($key);
+        return RedisUtil::wrap($this->connection->type(...), $key);
     }
 
     /**
-     * Deletes the specified keys asynchronously in another thread. Otherwise
+     * Deletes the specified keys asynchronously in another thread. Otherwise,
      * it's just as {@see FeatureGroupKeys::del()}, but non blocking.
      *
      * @param string ...$keys
      *
      * @return bool
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::unlink()
      */
     public function unlink(string ...$keys): bool
     {
-        return $this->connection->unlink(...$keys) > 0;
+        return RedisUtil::wrap($this->connection->unlink(...), ...$keys) > 0;
     }
 
     /**
@@ -351,12 +401,14 @@ trait RedisKeys
      * @param int $timeout
      *
      * @return int
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::wait()
      */
     public function wait(int $replicas, int $timeout): int
     {
-        return $this->connection->wait($replicas, $timeout);
+        return RedisUtil::wrap($this->connection->wait(...), $replicas, $timeout);
     }
 
 }

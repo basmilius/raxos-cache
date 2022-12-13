@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Raxos\Cache\Redis\Group;
 
+use Raxos\Cache\Redis\{RedisCacheException, RedisUtil};
 use Redis;
 
 /**
@@ -24,12 +25,15 @@ trait RedisSets
      * @param string ...$members
      *
      * @return int
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::sAdd()
+     * @noinspection SpellCheckingInspection
      */
     public function sadd(string $key, string ...$members): int
     {
-        return $this->connection->sAdd($key, ...$members);
+        return RedisUtil::wrap($this->connection->sAdd(...), $key, ...$members);
     }
 
     /**
@@ -38,12 +42,15 @@ trait RedisSets
      * @param string $key
      *
      * @return int
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::sCard()
+     * @noinspection SpellCheckingInspection
      */
     public function scard(string $key): int
     {
-        return $this->connection->sCard($key);
+        return RedisUtil::wrap($this->connection->sCard(...), $key);
     }
 
     /**
@@ -52,12 +59,15 @@ trait RedisSets
      * @param string ...$keys
      *
      * @return string[]
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::sDiff()
+     * @noinspection SpellCheckingInspection
      */
     public function sdiff(string ...$keys): array
     {
-        return $this->connection->sDiff(...$keys);
+        return RedisUtil::wrap($this->connection->sDiff(...), ...$keys);
     }
 
     /**
@@ -68,12 +78,15 @@ trait RedisSets
      * @param string ...$keys
      *
      * @return int|null
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::sDiffStore()
+     * @noinspection SpellCheckingInspection
      */
     public function sdiffstore(string $destination, string ...$keys): ?int
     {
-        return $this->connection->sDiffStore($destination, ...$keys) ?: null;
+        return RedisUtil::wrap($this->connection->sDiffStore(...), $destination, ...$keys) ?: null;
     }
 
     /**
@@ -82,12 +95,14 @@ trait RedisSets
      * @param string ...$keys
      *
      * @return string[]
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::sInter()
      */
     public function sinter(string ...$keys): array
     {
-        return $this->connection->sInter(...$keys);
+        return RedisUtil::wrap($this->connection->sInter(...), ...$keys);
     }
 
     /**
@@ -98,12 +113,15 @@ trait RedisSets
      * @param string ...$keys
      *
      * @return int|null
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::sInterStore()
+     * @noinspection SpellCheckingInspection
      */
     public function sinterstore(string $destination, string ...$keys): ?int
     {
-        return $this->connection->sInterStore($destination, ...$keys) ?: null;
+        return RedisUtil::wrap($this->connection->sInterStore(...), $destination, ...$keys) ?: null;
     }
 
     /**
@@ -113,12 +131,15 @@ trait RedisSets
      * @param string $member
      *
      * @return bool
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::sIsMember()
+     * @noinspection SpellCheckingInspection
      */
     public function sismember(string $key, string $member): bool
     {
-        return $this->connection->sIsMember($key, $member);
+        return RedisUtil::wrap($this->connection->sIsMember(...), $key, $member);
     }
 
     /**
@@ -127,12 +148,15 @@ trait RedisSets
      * @param string $key
      *
      * @return string[]
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::sMembers()
+     * @noinspection SpellCheckingInspection
      */
     public function smembers(string $key): array
     {
-        return $this->connection->sMembers($key);
+        return RedisUtil::wrap($this->connection->sMembers(...), $key);
     }
 
     /**
@@ -144,12 +168,15 @@ trait RedisSets
      * @param string $member
      *
      * @return bool
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::sMove()
+     * @noinspection SpellCheckingInspection
      */
     public function smove(string $source, string $destination, string $member): bool
     {
-        return $this->connection->sMove($source, $destination, $member);
+        return RedisUtil::wrap($this->connection->sMove(...), $source, $destination, $member);
     }
 
     /**
@@ -160,12 +187,15 @@ trait RedisSets
      * @param int $count
      *
      * @return mixed
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::sPop()
+     * @noinspection SpellCheckingInspection
      */
     public function spop(string $key, int $count = 1): mixed
     {
-        return $this->connection->sPop($key, $count);
+        return RedisUtil::wrap($this->connection->sPop(...), $key, $count);
     }
 
     /**
@@ -175,12 +205,15 @@ trait RedisSets
      * @param int $count
      *
      * @return mixed
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::sRandMember()
+     * @noinspection SpellCheckingInspection
      */
     public function srandmember(string $key, int $count = 1): mixed
     {
-        return $this->connection->sRandMember($key, $count);
+        return RedisUtil::wrap($this->connection->sRandMember(...), $key, $count);
     }
 
     /**
@@ -190,12 +223,15 @@ trait RedisSets
      * @param string ...$members
      *
      * @return int
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::sRem()
+     * @noinspection SpellCheckingInspection
      */
     public function srem(string $key, string ...$members): int
     {
-        return $this->connection->sRem($key, ...$members);
+        return RedisUtil::wrap($this->connection->sRem(...), $key, ...$members);
     }
 
     /**
@@ -204,12 +240,15 @@ trait RedisSets
      * @param string ...$keys
      *
      * @return mixed
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::sUnion()
+     * @noinspection SpellCheckingInspection
      */
     public function sunion(string ...$keys): array
     {
-        return $this->connection->sUnion(...$keys);
+        return RedisUtil::wrap($this->connection->sUnion(...), ...$keys);
     }
 
     /**
@@ -219,12 +258,15 @@ trait RedisSets
      * @param string ...$keys
      *
      * @return int
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::sUnionStore()
+     * @noinspection SpellCheckingInspection
      */
     public function sunionstore(string $destination, string ...$keys): int
     {
-        return $this->connection->sUnionStore($destination, ...$keys);
+        return RedisUtil::wrap($this->connection->sUnionStore(...), $destination, ...$keys);
     }
 
 }

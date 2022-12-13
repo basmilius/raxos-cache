@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Raxos\Cache\Redis\Group;
 
+use Raxos\Cache\Redis\{RedisCacheException, RedisUtil};
 use Redis;
 
 /**
@@ -23,12 +24,15 @@ trait RedisPubSub
      * @param string[] $patterns
      * @param callable $fn
      *
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::psubscribe()
+     * @noinspection SpellCheckingInspection
      */
     public function psubscribe(array $patterns, callable $fn): void
     {
-        $this->connection->psubscribe($patterns, $fn);
+        RedisUtil::wrap($this->connection->psubscribe(...), $patterns, $fn);
     }
 
     /**
@@ -38,12 +42,14 @@ trait RedisPubSub
      * @param string $message
      *
      * @return int
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::publish()
      */
     public function publish(string $channel, string $message): int
     {
-        return $this->connection->publish($channel, $message);
+        return RedisUtil::wrap($this->connection->publish(...), $channel, $message);
     }
 
     /**
@@ -53,25 +59,31 @@ trait RedisPubSub
      * @param string|array $argument
      *
      * @return array|int
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::pubsub()
+     * @noinspection SpellCheckingInspection
      */
     public function pubsub(string $keyword, string|array $argument): array|int
     {
-        return $this->connection->pubsub($keyword, $argument);
+        return RedisUtil::wrap($this->connection->pubsub(...), $keyword, $argument);
     }
 
     /**
-     * Unsubsribe from channels that match the given patterns.
+     * Unsubscribe from channels that match the given patterns.
      *
      * @param array|null $patterns
      *
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::punsubscribe()
+     * @noinspection SpellCheckingInspection
      */
     public function punsubscribe(?array $patterns = null): void
     {
-        $this->connection->punsubscribe($patterns);
+        RedisUtil::wrap($this->connection->punsubscribe(...), $patterns);
     }
 
     /**
@@ -80,12 +92,14 @@ trait RedisPubSub
      * @param string[] $channels
      * @param callable $fn
      *
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::subscribe()
      */
     public function subscribe(array $channels, callable $fn): void
     {
-        $this->connection->subscribe($channels, $fn);
+        RedisUtil::wrap($this->connection->subscribe(...), $channels, $fn);
     }
 
     /**
@@ -93,12 +107,14 @@ trait RedisPubSub
      *
      * @param array|null $channels
      *
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::unsubscribe()
      */
     public function unsubscribe(?array $channels = null): void
     {
-        $this->connection->unsubscribe($channels);
+        RedisUtil::wrap($this->connection->unsubscribe(...), $channels);
     }
 
 }

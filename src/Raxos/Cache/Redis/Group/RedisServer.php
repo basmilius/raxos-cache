@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Raxos\Cache\Redis\Group;
 
+use Raxos\Cache\Redis\{RedisCacheException, RedisUtil};
 use Redis;
 
 /**
@@ -21,24 +22,28 @@ trait RedisServer
      * Removes all information from all databases.
      *
      * @return bool
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::flushAll()
      */
     public function flushAll(): bool
     {
-        return $this->connection->flushAll();
+        return RedisUtil::wrap($this->connection->flushAll(...));
     }
 
     /**
      * Removes all information from the current database.
      *
      * @return bool
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::flushDB()
      */
     public function flushDatabase(): bool
     {
-        return $this->connection->flushDB();
+        return RedisUtil::wrap($this->connection->flushDB(...));
     }
 
 }

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Raxos\Cache\Redis\Group;
 
+use Raxos\Cache\Redis\{RedisCacheException, RedisUtil};
 use Redis;
 
 /**
@@ -24,12 +25,14 @@ trait RedisStrings
      * @param mixed $value
      *
      * @return int
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::append()
      */
     public function append(string $key, mixed $value): int
     {
-        return $this->connection->append($key, $value);
+        return RedisUtil::wrap($this->connection->append(...), $key, $value);
     }
 
     /**
@@ -38,12 +41,15 @@ trait RedisStrings
      * @param string $key
      *
      * @return int
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::bitCount()
+     * @noinspection SpellCheckingInspection
      */
     public function bitcount(string $key): int
     {
-        return $this->connection->bitCount($key);
+        return RedisUtil::wrap($this->connection->bitCount(...), $key);
     }
 
     /**
@@ -54,12 +60,15 @@ trait RedisStrings
      * @param string ...$keys
      *
      * @return int
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::bitOp()
+     * @noinspection SpellCheckingInspection
      */
     public function bitop(string $operation, string $destinationKey, string ...$keys): int
     {
-        return $this->connection->bitOp($operation, $destinationKey, ...$keys);
+        return RedisUtil::wrap($this->connection->bitOp(...), $operation, $destinationKey, ...$keys);
     }
 
     /**
@@ -71,12 +80,15 @@ trait RedisStrings
      * @param int|null $end
      *
      * @return int
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::bitpos()
+     * @noinspection SpellCheckingInspection
      */
     public function bitpos(string $key, int $bit, int $start = 0, ?int $end = null): int
     {
-        return $this->connection->bitpos($key, $bit, $start, $end);
+        return RedisUtil::wrap($this->connection->bitpos(...), $key, $bit, $start, $end);
     }
 
     /**
@@ -85,12 +97,14 @@ trait RedisStrings
      * @param string $key
      *
      * @return int
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::decr()
      */
     public function decr(string $key): int
     {
-        return $this->connection->decr($key);
+        return RedisUtil::wrap($this->connection->decr(...), $key);
     }
 
     /**
@@ -100,12 +114,15 @@ trait RedisStrings
      * @param int $amount
      *
      * @return int
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::decrBy()
+     * @noinspection SpellCheckingInspection
      */
     public function decrby(string $key, int $amount): int
     {
-        return $this->connection->decrBy($key, $amount);
+        return RedisUtil::wrap($this->connection->decrBy(...), $key, $amount);
     }
 
     /**
@@ -114,12 +131,14 @@ trait RedisStrings
      * @param string $key
      *
      * @return mixed
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::get()
      */
     public function get(string $key): mixed
     {
-        return $this->connection->get($key);
+        return RedisUtil::wrap($this->connection->get(...), $key);
     }
 
     /**
@@ -130,12 +149,15 @@ trait RedisStrings
      * @param int $offset
      *
      * @return int
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::getBit()
+     * @noinspection SpellCheckingInspection
      */
     public function getbit(string $key, int $offset): int
     {
-        return $this->connection->getBit($key, $offset);
+        return RedisUtil::wrap($this->connection->getBit(...), $key, $offset);
     }
 
     /**
@@ -146,12 +168,15 @@ trait RedisStrings
      * @param int $end
      *
      * @return string
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::getRange()
+     * @noinspection SpellCheckingInspection
      */
     public function getrange(string $key, int $start, int $end): string
     {
-        return $this->connection->getRange($key, $start, $end);
+        return RedisUtil::wrap($this->connection->getRange(...), $key, $start, $end);
     }
 
     /**
@@ -161,12 +186,15 @@ trait RedisStrings
      * @param mixed $value
      *
      * @return mixed
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::getSet()
+     * @noinspection SpellCheckingInspection
      */
     public function getset(string $key, mixed $value): mixed
     {
-        return $this->connection->getSet($key, $value);
+        return RedisUtil::wrap($this->connection->getSet(...), $key, $value);
     }
 
     /**
@@ -175,12 +203,14 @@ trait RedisStrings
      * @param string $key
      *
      * @return int
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::incr()
      */
     public function incr(string $key): int
     {
-        return $this->connection->incr($key);
+        return RedisUtil::wrap($this->connection->incr(...), $key);
     }
 
     /**
@@ -190,12 +220,15 @@ trait RedisStrings
      * @param int $amount
      *
      * @return int
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::incrBy()
+     * @noinspection SpellCheckingInspection
      */
     public function incrby(string $key, int $amount): int
     {
-        return $this->connection->incrBy($key, $amount);
+        return RedisUtil::wrap($this->connection->incrBy(...), $key, $amount);
     }
 
     /**
@@ -205,12 +238,15 @@ trait RedisStrings
      * @param float $amount
      *
      * @return float
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::incrByFloat()
+     * @noinspection SpellCheckingInspection
      */
     public function incrbyfloat(string $key, float $amount): float
     {
-        return $this->connection->incrByFloat($key, $amount);
+        return RedisUtil::wrap($this->connection->incrByFloat(...), $key, $amount);
     }
 
     /**
@@ -219,12 +255,15 @@ trait RedisStrings
      * @param string ...$keys
      *
      * @return array
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::mget()
+     * @noinspection SpellCheckingInspection
      */
     public function mget(string ...$keys): array
     {
-        return $this->connection->mget($keys);
+        return RedisUtil::wrap($this->connection->mget(...), $keys);
     }
 
     /**
@@ -233,12 +272,15 @@ trait RedisStrings
      * @param array $sets
      *
      * @return bool
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::mset()
+     * @noinspection SpellCheckingInspection
      */
     public function mset(array $sets): bool
     {
-        return $this->connection->mset($sets);
+        return RedisUtil::wrap($this->connection->mset(...), $sets);
     }
 
     /**
@@ -247,12 +289,15 @@ trait RedisStrings
      * @param array $sets
      *
      * @return bool
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::msetnx()
+     * @noinspection SpellCheckingInspection
      */
     public function msetnx(array $sets): bool
     {
-        return $this->connection->msetnx($sets) === 1;
+        return RedisUtil::wrap($this->connection->msetnx(...), $sets) === 1;
     }
 
     /**
@@ -263,12 +308,15 @@ trait RedisStrings
      * @param int $ttl
      *
      * @return bool
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::psetex()
+     * @noinspection SpellCheckingInspection
      */
     public function psetex(string $key, mixed $value, int $ttl): bool
     {
-        return $this->connection->psetex($key, $ttl, $value);
+        return RedisUtil::wrap($this->connection->psetex(...), $key, $ttl, $value);
     }
 
     /**
@@ -278,12 +326,14 @@ trait RedisStrings
      * @param mixed $value
      *
      * @return bool
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::set()
      */
     public function set(string $key, mixed $value): bool
     {
-        return $this->connection->set($key, $value);
+        return RedisUtil::wrap($this->connection->set(...), $key, $value);
     }
 
     /**
@@ -294,12 +344,15 @@ trait RedisStrings
      * @param bool $value
      *
      * @return int
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::setBit()
+     * @noinspection SpellCheckingInspection
      */
     public function setbit(string $key, int $offset, bool $value): int
     {
-        return $this->connection->setBit($key, $offset, $value);
+        return RedisUtil::wrap($this->connection->setBit(...), $key, $offset, $value);
     }
 
     /**
@@ -310,27 +363,33 @@ trait RedisStrings
      * @param int $ttl
      *
      * @return bool
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::setex()
+     * @noinspection SpellCheckingInspection
      */
     public function setex(string $key, mixed $value, int $ttl): bool
     {
-        return $this->connection->setex($key, $ttl, $value);
+        return RedisUtil::wrap($this->connection->setex(...), $key, $ttl, $value);
     }
 
     /**
-     * Sets the value of the specified key, but only if the key doesn't exists.
+     * Sets the value of the specified key, but only if the key doesn't exist.
      *
      * @param string $key
      * @param mixed $value
      *
      * @return bool
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::setnx()
+     * @noinspection SpellCheckingInspection
      */
     public function setnx(string $key, mixed $value): bool
     {
-        return $this->connection->setnx($key, $value);
+        return RedisUtil::wrap($this->connection->setnx(...), $key, $value);
     }
 
     /**
@@ -341,12 +400,15 @@ trait RedisStrings
      * @param string $value
      *
      * @return int
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::setRange()
+     * @noinspection SpellCheckingInspection
      */
     public function setrange(string $key, int $offset, string $value): int
     {
-        return $this->connection->setRange($key, $offset, $value);
+        return RedisUtil::wrap($this->connection->setRange(...), $key, $offset, $value);
     }
 
     /**
@@ -355,12 +417,14 @@ trait RedisStrings
      * @param string $key
      *
      * @return int
+     * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @see Redis::strlen()
      */
     public function strlen(string $key): int
     {
-        return $this->connection->strlen($key);
+        return RedisUtil::wrap($this->connection->strlen(...), $key);
     }
 
 }

@@ -16,10 +16,10 @@ use function sha1;
  * @package Raxos\Cache\Redis
  * @since 1.0.0
  */
-class RedisTaggedCache
+readonly class RedisTaggedCache implements RedisTaggedCacheInterface
 {
 
-    protected string $scope;
+    public string $scope;
 
     /**
      * RedisTaggedCache constructor.
@@ -33,8 +33,8 @@ class RedisTaggedCache
      * @since 1.0.0
      */
     public function __construct(
-        protected RedisCache $redis,
-        protected array $tags
+        public RedisCacheInterface $redis,
+        public array $tags
     )
     {
         if (empty($tags)) {
@@ -45,47 +45,7 @@ class RedisTaggedCache
     }
 
     /**
-     * Gets the Redis Cache instance.
-     *
-     * @return RedisCache
-     * @author Bas Milius <bas@mili.us>
-     * @since 1.0.0
-     */
-    public final function getRedis(): RedisCache
-    {
-        return $this->redis;
-    }
-
-    /**
-     * Gets the tag scope.
-     *
-     * @return string
-     * @author Bas Milius <bas@mili.us>
-     * @since 1.0.0
-     */
-    public final function getScope(): string
-    {
-        return $this->scope;
-    }
-
-    /**
-     * Gets the tags.
-     *
-     * @return string[]
-     * @author Bas Milius <bas@mili.us>
-     * @since 1.0.0
-     */
-    public final function getTags(): array
-    {
-        return $this->tags;
-    }
-
-    /**
-     * Returns the given key with tags embedded.
-     *
-     * @param string $key
-     *
-     * @return string
+     * {@inheritdoc}
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
@@ -95,51 +55,7 @@ class RedisTaggedCache
     }
 
     /**
-     * Generates a raw key.
-     *
-     * @param string ...$parts
-     *
-     * @return string
-     * @author Bas Milius <bas@mili.us>
-     * @since 1.0.0
-     */
-    public function keyRaw(string ...$parts): string
-    {
-        array_unshift($parts, $this->redis->getPrefix());
-
-        return implode(':', $parts);
-    }
-
-    /**
-     * Links the tags to the given key.
-     *
-     * @param string $key
-     * @param int $ttl
-     *
-     * @author Bas Milius <bas@mili.us>
-     * @since 1.0.0
-     */
-    public function linkTags(string $key, int $ttl): void
-    {
-        foreach ($this->tags as $tag) {
-            $tagKey = $this->keyRaw('tag', $tag, 'keys');
-            $setTtl = max($this->redis->ttl($tagKey), $ttl);
-
-            if ($setTtl < 0) {
-                $setTtl = null;
-            }
-
-            $this->redis->sadd($tagKey, $key);
-            $this->redis->expire($tagKey, $setTtl);
-        }
-    }
-
-    /**
-     * Deletes the given keys from the cache.
-     *
-     * @param string ...$keys
-     *
-     * @return bool
+     * {@inheritdoc}
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
@@ -151,11 +67,7 @@ class RedisTaggedCache
     }
 
     /**
-     * Returns TRUE if the given key exists.
-     *
-     * @param string $key
-     *
-     * @return bool
+     * {@inheritdoc}
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
@@ -167,8 +79,7 @@ class RedisTaggedCache
     }
 
     /**
-     * Removes all keys that match our tags.
-     *
+     * {@inheritdoc}
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
@@ -190,11 +101,7 @@ class RedisTaggedCache
     }
 
     /**
-     * Gets the value of the given key.
-     *
-     * @param string $key
-     *
-     * @return mixed
+     * {@inheritdoc}
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
@@ -206,19 +113,11 @@ class RedisTaggedCache
     }
 
     /**
-     * Remembers data in our cache.
-     *
-     * @template T
-     *
-     * @param string $key
-     * @param int $ttl
-     * @param callable():T $fn
-     *
-     * @return T
+     * {@inheritdoc}
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function remember(string $key, int $ttl, callable $fn)
+    public function remember(string $key, int $ttl, callable $fn): mixed
     {
         if ($this->exists($key)) {
             return $this->get($key);
@@ -230,13 +129,7 @@ class RedisTaggedCache
     }
 
     /**
-     * Sets the given value to the given key.
-     *
-     * @param string $key
-     * @param mixed $value
-     * @param int $ttl
-     *
-     * @return bool
+     * {@inheritdoc}
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
@@ -245,6 +138,47 @@ class RedisTaggedCache
         $this->linkTags($key = $this->key($key), $ttl);
 
         return $this->redis->setex($key, $value, $ttl);
+    }
+
+    /**
+     * Generates a raw key.
+     *
+     * @param string ...$parts
+     *
+     * @return string
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    private function keyRaw(string ...$parts): string
+    {
+        array_unshift($parts, $this->redis->getPrefix());
+
+        return implode(':', $parts);
+    }
+
+    /**
+     * Links the tags to the given key.
+     *
+     * @param string $key
+     * @param int $ttl
+     *
+     * @throws RedisCacheException
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    private function linkTags(string $key, int $ttl): void
+    {
+        foreach ($this->tags as $tag) {
+            $tagKey = $this->keyRaw('tag', $tag, 'keys');
+            $setTtl = max($this->redis->ttl($tagKey), $ttl);
+
+            if ($setTtl < 0) {
+                $setTtl = null;
+            }
+
+            $this->redis->sadd($tagKey, $key);
+            $this->redis->expire($tagKey, $setTtl);
+        }
     }
 
 }
