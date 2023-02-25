@@ -72,13 +72,13 @@ trait RedisKeys
      * @param string $key
      * @param int $seconds
      *
-     * @return bool
+     * @return int
      * @throws RedisCacheException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::expire()
      */
-    public function expire(string $key, int $seconds = 0): bool
+    public function expire(string $key, int $seconds = 0): int
     {
         return RedisUtil::wrap($this->connection->exists(...), $key, $seconds);
     }

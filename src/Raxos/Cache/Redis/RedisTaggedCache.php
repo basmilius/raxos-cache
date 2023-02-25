@@ -113,6 +113,22 @@ readonly class RedisTaggedCache implements RedisTaggedCacheInterface
     }
 
     /**
+     * Generates a raw key.
+     *
+     * @param string ...$parts
+     *
+     * @return string
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public function keyRaw(string ...$parts): string
+    {
+        array_unshift($parts, $this->redis->getPrefix());
+
+        return implode(':', $parts);
+    }
+
+    /**
      * {@inheritdoc}
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
@@ -138,22 +154,6 @@ readonly class RedisTaggedCache implements RedisTaggedCacheInterface
         $this->linkTags($key = $this->key($key), $ttl);
 
         return $this->redis->setex($key, $value, $ttl);
-    }
-
-    /**
-     * Generates a raw key.
-     *
-     * @param string ...$parts
-     *
-     * @return string
-     * @author Bas Milius <bas@mili.us>
-     * @since 1.0.0
-     */
-    private function keyRaw(string ...$parts): string
-    {
-        array_unshift($parts, $this->redis->getPrefix());
-
-        return implode(':', $parts);
     }
 
     /**
