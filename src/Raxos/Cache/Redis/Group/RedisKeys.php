@@ -378,7 +378,7 @@ trait RedisKeys
 
     /**
      * Deletes the specified keys asynchronously in another thread. Otherwise,
-     * it's just as {@see FeatureGroupKeys::del()}, but non blocking.
+     * it's just as {@see FeatureGroupKeys::del()}, but non-blocking.
      *
      * @param string ...$keys
      *

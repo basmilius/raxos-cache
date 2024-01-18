@@ -15,9 +15,9 @@ use Raxos\Cache\Error\CacheException;
 final class RedisCacheException extends CacheException
 {
 
-    public const ERR_DATABASE_SELECT_FAILED = 1;
-    public const ERR_INVALID_CALL = 2;
-    public const ERR_REDIS_EXCEPTION = 4;
-    public const ERR_REDIS_NOT_FOUND = 8;
+    public const int ERR_DATABASE_SELECT_FAILED = 1;
+    public const int ERR_INVALID_CALL = 2;
+    public const int ERR_REDIS_EXCEPTION = 4;
+    public const int ERR_REDIS_NOT_FOUND = 8;
 
 }
