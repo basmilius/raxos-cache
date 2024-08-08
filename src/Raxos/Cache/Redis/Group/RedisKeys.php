@@ -200,7 +200,6 @@ trait RedisKeys
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::pExpire()
-     * @noinspection SpellCheckingInspection
      */
     public function pexpire(string $key, int $milliseconds): bool
     {
@@ -218,7 +217,6 @@ trait RedisKeys
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::pExpireAt()
-     * @noinspection SpellCheckingInspection
      */
     public function pexpireat(string $key, $unixTimestampMs): bool
     {
@@ -235,7 +233,6 @@ trait RedisKeys
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::pttl()
-     * @noinspection SpellCheckingInspection
      */
     public function pttl(string $key): ?int
     {
@@ -250,7 +247,6 @@ trait RedisKeys
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::randomKey()
-     * @noinspection SpellCheckingInspection
      */
     public function randomkey(): string
     {
@@ -285,7 +281,6 @@ trait RedisKeys
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::renameNx()
-     * @noinspection SpellCheckingInspection
      */
     public function renamenx(string $key, string $newKey): bool
     {

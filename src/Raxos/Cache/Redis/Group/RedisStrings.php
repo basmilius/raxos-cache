@@ -45,7 +45,6 @@ trait RedisStrings
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::bitCount()
-     * @noinspection SpellCheckingInspection
      */
     public function bitcount(string $key): int
     {
@@ -64,7 +63,6 @@ trait RedisStrings
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::bitOp()
-     * @noinspection SpellCheckingInspection
      */
     public function bitop(string $operation, string $destinationKey, string ...$keys): int
     {
@@ -84,7 +82,6 @@ trait RedisStrings
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::bitpos()
-     * @noinspection SpellCheckingInspection
      */
     public function bitpos(string $key, int $bit, int $start = 0, ?int $end = null): int
     {
@@ -118,7 +115,6 @@ trait RedisStrings
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::decrBy()
-     * @noinspection SpellCheckingInspection
      */
     public function decrby(string $key, int $amount): int
     {
@@ -153,7 +149,6 @@ trait RedisStrings
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::getBit()
-     * @noinspection SpellCheckingInspection
      */
     public function getbit(string $key, int $offset): int
     {
@@ -172,7 +167,6 @@ trait RedisStrings
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::getRange()
-     * @noinspection SpellCheckingInspection
      */
     public function getrange(string $key, int $start, int $end): string
     {
@@ -190,7 +184,6 @@ trait RedisStrings
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::getSet()
-     * @noinspection SpellCheckingInspection
      */
     public function getset(string $key, mixed $value): mixed
     {
@@ -224,7 +217,6 @@ trait RedisStrings
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::incrBy()
-     * @noinspection SpellCheckingInspection
      */
     public function incrby(string $key, int $amount): int
     {
@@ -242,7 +234,6 @@ trait RedisStrings
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::incrByFloat()
-     * @noinspection SpellCheckingInspection
      */
     public function incrbyfloat(string $key, float $amount): float
     {
@@ -259,7 +250,6 @@ trait RedisStrings
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::mget()
-     * @noinspection SpellCheckingInspection
      */
     public function mget(string ...$keys): array
     {
@@ -276,7 +266,6 @@ trait RedisStrings
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::mset()
-     * @noinspection SpellCheckingInspection
      */
     public function mset(array $sets): bool
     {
@@ -293,7 +282,6 @@ trait RedisStrings
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::msetnx()
-     * @noinspection SpellCheckingInspection
      */
     public function msetnx(array $sets): bool
     {
@@ -312,7 +300,6 @@ trait RedisStrings
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::psetex()
-     * @noinspection SpellCheckingInspection
      */
     public function psetex(string $key, mixed $value, int $ttl): bool
     {
@@ -348,7 +335,6 @@ trait RedisStrings
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::setBit()
-     * @noinspection SpellCheckingInspection
      */
     public function setbit(string $key, int $offset, bool $value): int
     {
@@ -367,7 +353,6 @@ trait RedisStrings
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::setex()
-     * @noinspection SpellCheckingInspection
      */
     public function setex(string $key, mixed $value, int $ttl): bool
     {
@@ -385,7 +370,6 @@ trait RedisStrings
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::setnx()
-     * @noinspection SpellCheckingInspection
      */
     public function setnx(string $key, mixed $value): bool
     {
@@ -404,7 +388,6 @@ trait RedisStrings
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::setRange()
-     * @noinspection SpellCheckingInspection
      */
     public function setrange(string $key, int $offset, string $value): int
     {

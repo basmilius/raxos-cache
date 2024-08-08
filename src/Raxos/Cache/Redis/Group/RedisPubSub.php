@@ -28,7 +28,6 @@ trait RedisPubSub
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::psubscribe()
-     * @noinspection SpellCheckingInspection
      */
     public function psubscribe(array $patterns, callable $fn): void
     {
@@ -63,7 +62,6 @@ trait RedisPubSub
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::pubsub()
-     * @noinspection SpellCheckingInspection
      */
     public function pubsub(string $keyword, string|array $argument): array|int
     {
@@ -79,7 +77,6 @@ trait RedisPubSub
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::punsubscribe()
-     * @noinspection SpellCheckingInspection
      */
     public function punsubscribe(?array $patterns = null): void
     {

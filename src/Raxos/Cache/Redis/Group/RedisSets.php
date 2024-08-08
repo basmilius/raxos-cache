@@ -29,7 +29,6 @@ trait RedisSets
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::sAdd()
-     * @noinspection SpellCheckingInspection
      */
     public function sadd(string $key, string ...$members): int
     {
@@ -46,7 +45,6 @@ trait RedisSets
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::sCard()
-     * @noinspection SpellCheckingInspection
      */
     public function scard(string $key): int
     {
@@ -63,7 +61,6 @@ trait RedisSets
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::sDiff()
-     * @noinspection SpellCheckingInspection
      */
     public function sdiff(string ...$keys): array
     {
@@ -82,7 +79,6 @@ trait RedisSets
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::sDiffStore()
-     * @noinspection SpellCheckingInspection
      */
     public function sdiffstore(string $destination, string ...$keys): ?int
     {
@@ -117,7 +113,6 @@ trait RedisSets
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::sInterStore()
-     * @noinspection SpellCheckingInspection
      */
     public function sinterstore(string $destination, string ...$keys): ?int
     {
@@ -135,7 +130,6 @@ trait RedisSets
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::sIsMember()
-     * @noinspection SpellCheckingInspection
      */
     public function sismember(string $key, string $member): bool
     {
@@ -152,7 +146,6 @@ trait RedisSets
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::sMembers()
-     * @noinspection SpellCheckingInspection
      */
     public function smembers(string $key): array
     {
@@ -172,7 +165,6 @@ trait RedisSets
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::sMove()
-     * @noinspection SpellCheckingInspection
      */
     public function smove(string $source, string $destination, string $member): bool
     {
@@ -191,7 +183,6 @@ trait RedisSets
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::sPop()
-     * @noinspection SpellCheckingInspection
      */
     public function spop(string $key, int $count = 1): mixed
     {
@@ -209,7 +200,6 @@ trait RedisSets
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::sRandMember()
-     * @noinspection SpellCheckingInspection
      */
     public function srandmember(string $key, int $count = 1): mixed
     {
@@ -227,7 +217,6 @@ trait RedisSets
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::sRem()
-     * @noinspection SpellCheckingInspection
      */
     public function srem(string $key, string ...$members): int
     {
@@ -244,7 +233,6 @@ trait RedisSets
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::sUnion()
-     * @noinspection SpellCheckingInspection
      */
     public function sunion(string ...$keys): array
     {
@@ -262,7 +250,6 @@ trait RedisSets
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::sUnionStore()
-     * @noinspection SpellCheckingInspection
      */
     public function sunionstore(string $destination, string ...$keys): int
     {

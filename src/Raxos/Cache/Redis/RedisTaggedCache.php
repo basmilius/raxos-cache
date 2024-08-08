@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Raxos\Cache\Redis;
 
 use function array_map;
+use function array_merge;
 use function array_unshift;
 use function implode;
 use function max;
@@ -85,15 +86,13 @@ readonly class RedisTaggedCache implements RedisTaggedCacheInterface
      */
     public function flush(): void
     {
-        $remove = [];
-
-        foreach ($this->tags as $tag) {
+        $remove = array_merge(...array_map(function (string $tag): array {
             $tagKey = $this->keyRaw('tag', $tag, 'keys');
             $members = $this->redis->smembers($tagKey);
-            $members[] = $tagKey; // Also remove the set as well.
+            $members[] = $tagKey;
 
-            $remove = array_merge($remove, $members);
-        }
+            return $members;
+        }, $this->tags));
 
         foreach ($remove as $key) {
             $this->redis->del($key);
