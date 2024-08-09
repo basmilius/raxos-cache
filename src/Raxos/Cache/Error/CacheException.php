@@ -12,6 +12,4 @@ use Raxos\Foundation\Error\RaxosException;
  * @package Raxos\Cache\Error
  * @since 1.0.0
  */
-abstract class CacheException extends RaxosException
-{
-}
+abstract class CacheException extends RaxosException {}
