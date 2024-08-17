@@ -34,7 +34,7 @@ final class RedisUtil
         try {
             return $fn(...$arguments);
         } catch (RedisException $err) {
-            throw new RedisCacheException($err->getMessage(), RedisCacheException::ERR_REDIS_EXCEPTION, $err);
+            throw RedisCacheException::error($err);
         }
     }
 

@@ -39,7 +39,7 @@ readonly class RedisTaggedCache implements RedisTaggedCacheInterface
     )
     {
         if (empty($tags)) {
-            throw new RedisCacheException('Tagged cache should at least have one tag.', RedisCacheException::ERR_INVALID_CALL);
+            throw RedisCacheException::commandFailed('TAGS', 'At least one tag should be provided.');
         }
 
         $this->scope = implode('|', $this->tags);

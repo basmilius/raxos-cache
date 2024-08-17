@@ -48,7 +48,7 @@ class RedisCache implements RedisCacheInterface
     )
     {
         if (!class_exists(Redis::class)) {
-            throw new RedisCacheException('Redis is not installed on the webserver.', RedisCacheException::ERR_REDIS_NOT_FOUND);
+            throw RedisCacheException::notInstalled();
         }
 
         $this->connection = new Redis();
@@ -112,7 +112,7 @@ class RedisCache implements RedisCacheInterface
     public function selectDatabase(int $databaseId): void
     {
         if (RedisUtil::wrap($this->connection->select(...), $databaseId) === false) {
-            throw new RedisCacheException(sprintf('Could not select database with id %d.', $databaseId), RedisCacheException::ERR_DATABASE_SELECT_FAILED);
+            throw RedisCacheException::commandFailed('SELECT', sprintf('Could not select database with id %d.', $databaseId));
         }
     }
 
