@@ -101,8 +101,8 @@ trait RedisKeys
     }
 
     /**
-     * Find all keys that match the given pattern. If no pattern was specified
-     * all keys are returned.
+     * Find all keys that match the given pattern. If no pattern was
+     * specified, all keys are returned.
      *
      * @param string $pattern
      *
@@ -271,7 +271,7 @@ trait RedisKeys
     }
 
     /**
-     * Renames the specified key, but only if the new name doesn't already exixts.
+     * Renames the specified key, but only if the new name doesn't already exist.
      *
      * @param string $key
      * @param string $newKey

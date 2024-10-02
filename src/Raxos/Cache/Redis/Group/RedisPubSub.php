@@ -52,7 +52,7 @@ trait RedisPubSub
     }
 
     /**
-     * Returns information about the Redis pub/sub system.
+     * Returns information about the Redis pub/subsystem.
      *
      * @param string $keyword
      * @param string|array $argument
