@@ -356,7 +356,7 @@ trait RedisKeys
     }
 
     /**
-     * Determine the type of the value of the specified key.
+     * Determine the value type of the specified key.
      *
      * @param string $key
      *
