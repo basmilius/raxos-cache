@@ -3,7 +3,7 @@
     "description": "Cache clients and utilities.",
     "license": "mit",
     "minimum-stability": "dev",
-    "prefer-stable" : true,
+    "prefer-stable": true,
     "type": "library",
     "authors": [
         {
