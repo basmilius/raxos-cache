@@ -3,8 +3,11 @@ declare(strict_types=1);
 
 namespace Raxos\Cache\Redis;
 
+use Raxos\Cache\Redis\Contract\{RedisCacheInterface, RedisTaggedCacheInterface};
+use Raxos\Cache\Redis\Error\{RedisCacheException, RedisCommandFailedException, RedisConnectionFailedException, RedisImplementationMissingException};
 use Raxos\Cache\Redis\Group\{RedisKeys, RedisPubSub, RedisServer, RedisSets, RedisStrings};
 use Redis;
+use RedisException;
 use function class_exists;
 use function sprintf;
 
@@ -48,13 +51,17 @@ class RedisCache implements RedisCacheInterface
     )
     {
         if (!class_exists(Redis::class)) {
-            throw RedisCacheException::notInstalled();
+            throw new RedisImplementationMissingException();
         }
 
-        $this->connection = new Redis();
+        try {
+            $this->connection = new Redis();
 
-        if ($connect) {
-            $this->connect();
+            if ($connect) {
+                $this->connect();
+            }
+        } catch (RedisException) {
+            throw new RedisConnectionFailedException();
         }
     }
 
@@ -112,7 +119,7 @@ class RedisCache implements RedisCacheInterface
     public function selectDatabase(int $databaseId): void
     {
         if (RedisUtil::wrap($this->connection->select(...), $databaseId) === false) {
-            throw RedisCacheException::commandFailed('SELECT', sprintf('Could not select database with id %d.', $databaseId));
+            throw new RedisCommandFailedException('SELECT', sprintf('Could not select database with id %d.', $databaseId));
         }
     }
 

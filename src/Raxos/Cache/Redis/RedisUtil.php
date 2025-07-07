@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Raxos\Cache\Redis;
 
+use Raxos\Cache\Redis\Error\RedisCacheException;
+use Raxos\Cache\Redis\Error\RedisErrorException;
 use RedisException;
 
 /**
@@ -19,7 +21,7 @@ final class RedisUtil
      * Calls the given Redis function and when an {@see RedisException} is
      * thrown it is converted into a {@see RedisCacheException}.
      *
-     * @template T
+     * @template T of mixed
      *
      * @param callable():T $fn
      * @param mixed ...$arguments
@@ -34,7 +36,7 @@ final class RedisUtil
         try {
             return $fn(...$arguments);
         } catch (RedisException $err) {
-            throw RedisCacheException::error($err);
+            throw new RedisErrorException($err);
         }
     }
 

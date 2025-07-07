@@ -3,7 +3,8 @@ declare(strict_types=1);
 
 namespace Raxos\Cache\Redis\Group;
 
-use Raxos\Cache\Redis\{RedisCacheException, RedisUtil};
+use Raxos\Cache\Redis\Error\RedisCacheException;
+use Raxos\Cache\Redis\RedisUtil;
 use Redis;
 
 /**

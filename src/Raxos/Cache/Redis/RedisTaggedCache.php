@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Raxos\Cache\Redis;
 
+use Raxos\Cache\Redis\Contract\{RedisCacheInterface, RedisTaggedCacheInterface};
+use Raxos\Cache\Redis\Error\{RedisCacheException, RedisCommandFailedException};
 use function array_map;
 use function array_merge;
 use function array_unshift;
@@ -39,7 +41,7 @@ readonly class RedisTaggedCache implements RedisTaggedCacheInterface
     )
     {
         if (empty($tags)) {
-            throw RedisCacheException::commandFailed('TAGS', 'At least one tag should be provided.');
+            throw new RedisCommandFailedException('TAGS', 'At least one tag should be provided.');
         }
 
         $this->scope = implode('|', $this->tags);
