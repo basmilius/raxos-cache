@@ -3,7 +3,8 @@ declare(strict_types=1);
 
 namespace Raxos\Cache\Redis\Error;
 
-use Raxos\Foundation\Error\ExceptionId;
+use Raxos\Contract\Cache\RedisCacheExceptionInterface;
+use Raxos\Error\Exception;
 
 /**
  * Class RedisImplementationMissingException
@@ -12,7 +13,7 @@ use Raxos\Foundation\Error\ExceptionId;
  * @package Raxos\Cache\Redis\Error
  * @since 2.0.0
  */
-final class RedisImplementationMissingException extends RedisCacheException
+final class RedisImplementationMissingException extends Exception implements RedisCacheExceptionInterface
 {
 
     /**
@@ -24,7 +25,6 @@ final class RedisImplementationMissingException extends RedisCacheException
     public function __construct()
     {
         parent::__construct(
-            ExceptionId::guess(),
             'redis_implementation_missing',
             'A Redis implementation is missing on the system.'
         );

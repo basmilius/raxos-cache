@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Raxos\Cache\Redis\Group;
 
-use Raxos\Cache\Redis\Error\RedisCacheException;
 use Raxos\Cache\Redis\RedisUtil;
+use Raxos\Contract\Cache\RedisCacheExceptionInterface;
 use Redis;
 
 /**
@@ -25,7 +25,7 @@ trait RedisKeys
      * @param string ...$keys
      *
      * @return bool
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::del()
@@ -41,7 +41,7 @@ trait RedisKeys
      * @param string $key
      *
      * @return string|null
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::dump()
@@ -57,7 +57,7 @@ trait RedisKeys
      * @param string $key
      *
      * @return bool
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::exists()
@@ -74,7 +74,7 @@ trait RedisKeys
      * @param int $seconds
      *
      * @return int
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::expire()
@@ -91,7 +91,7 @@ trait RedisKeys
      * @param int $unixTimestamp
      *
      * @return bool
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::expireAt()
@@ -108,7 +108,7 @@ trait RedisKeys
      * @param string $pattern
      *
      * @return string[]
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::keys()
@@ -130,7 +130,7 @@ trait RedisKeys
      * @param bool $replace
      *
      * @return bool
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::migrate()
@@ -147,7 +147,7 @@ trait RedisKeys
      * @param int $database
      *
      * @return bool
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::move()
@@ -164,7 +164,7 @@ trait RedisKeys
      * @param string $key
      *
      * @return bool|int|string
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::object()
@@ -180,7 +180,7 @@ trait RedisKeys
      * @param string $key
      *
      * @return bool
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::persist()
@@ -197,7 +197,7 @@ trait RedisKeys
      * @param int $milliseconds
      *
      * @return bool
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::pExpire()
@@ -214,7 +214,7 @@ trait RedisKeys
      * @param $unixTimestampMs
      *
      * @return bool
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::pExpireAt()
@@ -230,7 +230,7 @@ trait RedisKeys
      * @param string $key
      *
      * @return int|null
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::pttl()
@@ -244,7 +244,7 @@ trait RedisKeys
      * Returns a random key from the keyspace.
      *
      * @return string
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::randomKey()
@@ -261,7 +261,7 @@ trait RedisKeys
      * @param string $newKey
      *
      * @return bool
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::rename()
@@ -278,7 +278,7 @@ trait RedisKeys
      * @param string $newKey
      *
      * @return bool
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::renameNx()
@@ -297,7 +297,7 @@ trait RedisKeys
      * @param string $serialized
      *
      * @return bool
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::restore()
@@ -314,7 +314,7 @@ trait RedisKeys
      * @param array|null $options
      *
      * @return array
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::sort()
@@ -330,7 +330,7 @@ trait RedisKeys
      * @param string ...$keys
      *
      * @return bool
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::rawCommand()
@@ -346,7 +346,7 @@ trait RedisKeys
      * @param string $key
      *
      * @return int
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::ttl()
@@ -362,7 +362,7 @@ trait RedisKeys
      * @param string $key
      *
      * @return int
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::type()
@@ -379,7 +379,7 @@ trait RedisKeys
      * @param string ...$keys
      *
      * @return bool
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::unlink()
@@ -397,7 +397,7 @@ trait RedisKeys
      * @param int $timeout
      *
      * @return int
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::wait()

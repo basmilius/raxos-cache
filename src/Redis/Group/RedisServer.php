@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Raxos\Cache\Redis\Group;
 
-use Raxos\Cache\Redis\Error\RedisCacheException;
 use Raxos\Cache\Redis\RedisUtil;
+use Raxos\Contract\Cache\RedisCacheExceptionInterface;
 use Redis;
 
 /**
@@ -23,7 +23,7 @@ trait RedisServer
      * Removes all information from all databases.
      *
      * @return bool
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::flushAll()
@@ -37,7 +37,7 @@ trait RedisServer
      * Removes all information from the current database.
      *
      * @return bool
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::flushDB()

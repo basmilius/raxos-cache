@@ -3,7 +3,8 @@ declare(strict_types=1);
 
 namespace Raxos\Cache\Redis\Error;
 
-use Raxos\Foundation\Error\ExceptionId;
+use Raxos\Contract\Cache\RedisCacheExceptionInterface;
+use Raxos\Error\Exception;
 
 /**
  * Class RedisCommandFailedException
@@ -12,7 +13,7 @@ use Raxos\Foundation\Error\ExceptionId;
  * @package Raxos\Cache\Redis\Error
  * @since 2.0.0
  */
-final class RedisCommandFailedException extends RedisCacheException
+final class RedisCommandFailedException extends Exception implements RedisCacheExceptionInterface
 {
 
     /**
@@ -36,7 +37,6 @@ final class RedisCommandFailedException extends RedisCacheException
         }
 
         parent::__construct(
-            ExceptionId::guess(),
             'redis_command_failed',
             $message
         );

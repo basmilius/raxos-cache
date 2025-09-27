@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace Raxos\Cache\Redis;
 
-use Raxos\Cache\Redis\Contract\{RedisCacheInterface, RedisTaggedCacheInterface};
-use Raxos\Cache\Redis\Error\{RedisCacheException, RedisCommandFailedException, RedisConnectionFailedException, RedisImplementationMissingException};
+use Raxos\Cache\Redis\Error\{RedisCommandFailedException, RedisConnectionFailedException, RedisImplementationMissingException};
 use Raxos\Cache\Redis\Group\{RedisKeys, RedisPubSub, RedisServer, RedisSets, RedisStrings};
+use Raxos\Contract\Cache\{RedisCacheExceptionInterface, RedisCacheInterface, RedisTaggedCacheInterface};
 use Redis;
 use RedisException;
 use function class_exists;
@@ -38,7 +38,7 @@ class RedisCache implements RedisCacheInterface
      * @param float $timeout
      * @param bool $connect
      *
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */

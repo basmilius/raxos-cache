@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Raxos\Cache\Redis;
 
-use Raxos\Cache\Redis\Error\RedisCacheException;
 use Raxos\Cache\Redis\Error\RedisErrorException;
+use Raxos\Contract\Cache\RedisCacheExceptionInterface;
 use RedisException;
 
 /**
@@ -27,7 +27,7 @@ final class RedisUtil
      * @param mixed ...$arguments
      *
      * @return T
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.6
      */

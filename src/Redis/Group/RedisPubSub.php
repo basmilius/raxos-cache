@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Raxos\Cache\Redis\Group;
 
-use Raxos\Cache\Redis\Error\RedisCacheException;
 use Raxos\Cache\Redis\RedisUtil;
+use Raxos\Contract\Cache\RedisCacheExceptionInterface;
 use Redis;
 
 /**
@@ -25,7 +25,7 @@ trait RedisPubSub
      * @param string[] $patterns
      * @param callable $fn
      *
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::psubscribe()
@@ -42,7 +42,7 @@ trait RedisPubSub
      * @param string $message
      *
      * @return int
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::publish()
@@ -59,7 +59,7 @@ trait RedisPubSub
      * @param string|array $argument
      *
      * @return array|int
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::pubsub()
@@ -74,7 +74,7 @@ trait RedisPubSub
      *
      * @param array|null $patterns
      *
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::punsubscribe()
@@ -90,7 +90,7 @@ trait RedisPubSub
      * @param string[] $channels
      * @param callable $fn
      *
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::subscribe()
@@ -105,7 +105,7 @@ trait RedisPubSub
      *
      * @param array|null $channels
      *
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::unsubscribe()

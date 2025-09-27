@@ -31,6 +31,8 @@
     "require": {
         "ext-redis": "*",
         "jetbrains/phpstorm-attributes": "^1.2",
+        "raxos/contract": "*",
+        "raxos/error": "*",
         "raxos/foundation": "*"
     }
 }

@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Raxos\Cache\Redis;
 
-use Raxos\Cache\Redis\Contract\{RedisCacheInterface, RedisTaggedCacheInterface};
-use Raxos\Cache\Redis\Error\{RedisCacheException, RedisCommandFailedException};
+use Raxos\Cache\Redis\Error\RedisCommandFailedException;
+use Raxos\Contract\Cache\{RedisCacheExceptionInterface, RedisCacheInterface, RedisTaggedCacheInterface};
 use function array_map;
 use function array_merge;
 use function array_unshift;
@@ -27,11 +27,10 @@ readonly class RedisTaggedCache implements RedisTaggedCacheInterface
     /**
      * RedisTaggedCache constructor.
      *
-     * @param RedisCache $redis
+     * @param RedisCacheInterface $redis
      * @param array $tags
      *
-     * @throws RedisCacheException
-     *
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
@@ -163,7 +162,7 @@ readonly class RedisTaggedCache implements RedisTaggedCacheInterface
      * @param string $key
      * @param int $ttl
      *
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */

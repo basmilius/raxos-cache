@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Raxos\Cache\Redis\Group;
 
-use Raxos\Cache\Redis\Error\RedisCacheException;
 use Raxos\Cache\Redis\RedisUtil;
+use Raxos\Contract\Cache\RedisCacheExceptionInterface;
 use Redis;
 
 /**
@@ -26,7 +26,7 @@ trait RedisSets
      * @param string ...$members
      *
      * @return int
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::sAdd()
@@ -42,7 +42,7 @@ trait RedisSets
      * @param string $key
      *
      * @return int
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::sCard()
@@ -58,7 +58,7 @@ trait RedisSets
      * @param string ...$keys
      *
      * @return string[]
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::sDiff()
@@ -76,7 +76,7 @@ trait RedisSets
      * @param string ...$keys
      *
      * @return int|null
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::sDiffStore()
@@ -92,7 +92,7 @@ trait RedisSets
      * @param string ...$keys
      *
      * @return string[]
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::sInter()
@@ -110,7 +110,7 @@ trait RedisSets
      * @param string ...$keys
      *
      * @return int|null
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::sInterStore()
@@ -127,7 +127,7 @@ trait RedisSets
      * @param string $member
      *
      * @return bool
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::sIsMember()
@@ -143,7 +143,7 @@ trait RedisSets
      * @param string $key
      *
      * @return string[]
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::sMembers()
@@ -162,7 +162,7 @@ trait RedisSets
      * @param string $member
      *
      * @return bool
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::sMove()
@@ -180,7 +180,7 @@ trait RedisSets
      * @param int $count
      *
      * @return mixed
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::sPop()
@@ -197,7 +197,7 @@ trait RedisSets
      * @param int $count
      *
      * @return mixed
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::sRandMember()
@@ -214,7 +214,7 @@ trait RedisSets
      * @param string ...$members
      *
      * @return int
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::sRem()
@@ -230,7 +230,7 @@ trait RedisSets
      * @param string ...$keys
      *
      * @return mixed
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::sUnion()
@@ -247,7 +247,7 @@ trait RedisSets
      * @param string ...$keys
      *
      * @return int
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::sUnionStore()

@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Raxos\Cache\Redis\Group;
 
-use Raxos\Cache\Redis\Error\RedisCacheException;
 use Raxos\Cache\Redis\RedisUtil;
+use Raxos\Contract\Cache\RedisCacheExceptionInterface;
 use Redis;
 
 /**
@@ -26,7 +26,7 @@ trait RedisStrings
      * @param mixed $value
      *
      * @return int
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::append()
@@ -42,7 +42,7 @@ trait RedisStrings
      * @param string $key
      *
      * @return int
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::bitCount()
@@ -60,7 +60,7 @@ trait RedisStrings
      * @param string ...$keys
      *
      * @return int
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::bitOp()
@@ -79,7 +79,7 @@ trait RedisStrings
      * @param int|null $end
      *
      * @return int
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::bitpos()
@@ -95,7 +95,7 @@ trait RedisStrings
      * @param string $key
      *
      * @return int
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::decr()
@@ -112,7 +112,7 @@ trait RedisStrings
      * @param int $amount
      *
      * @return int
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::decrBy()
@@ -128,7 +128,7 @@ trait RedisStrings
      * @param string $key
      *
      * @return mixed
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::get()
@@ -146,7 +146,7 @@ trait RedisStrings
      * @param int $offset
      *
      * @return int
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::getBit()
@@ -164,7 +164,7 @@ trait RedisStrings
      * @param int $end
      *
      * @return string
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::getRange()
@@ -181,7 +181,7 @@ trait RedisStrings
      * @param mixed $value
      *
      * @return mixed
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::getSet()
@@ -197,7 +197,7 @@ trait RedisStrings
      * @param string $key
      *
      * @return int
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::incr()
@@ -214,7 +214,7 @@ trait RedisStrings
      * @param int $amount
      *
      * @return int
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::incrBy()
@@ -231,7 +231,7 @@ trait RedisStrings
      * @param float $amount
      *
      * @return float
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::incrByFloat()
@@ -247,7 +247,7 @@ trait RedisStrings
      * @param string ...$keys
      *
      * @return array
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::mget()
@@ -263,7 +263,7 @@ trait RedisStrings
      * @param array $sets
      *
      * @return bool
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::mset()
@@ -279,7 +279,7 @@ trait RedisStrings
      * @param array $sets
      *
      * @return bool
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::msetnx()
@@ -297,7 +297,7 @@ trait RedisStrings
      * @param int $ttl
      *
      * @return bool
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::psetex()
@@ -314,7 +314,7 @@ trait RedisStrings
      * @param mixed $value
      *
      * @return bool
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::set()
@@ -332,7 +332,7 @@ trait RedisStrings
      * @param bool $value
      *
      * @return int
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::setBit()
@@ -350,7 +350,7 @@ trait RedisStrings
      * @param int $ttl
      *
      * @return bool
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::setex()
@@ -367,7 +367,7 @@ trait RedisStrings
      * @param mixed $value
      *
      * @return bool
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::setnx()
@@ -385,7 +385,7 @@ trait RedisStrings
      * @param string $value
      *
      * @return int
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::setRange()
@@ -401,7 +401,7 @@ trait RedisStrings
      * @param string $key
      *
      * @return int
-     * @throws RedisCacheException
+     * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @see Redis::strlen()
