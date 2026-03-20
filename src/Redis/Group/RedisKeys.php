@@ -81,7 +81,7 @@ trait RedisKeys
      */
     public function expire(string $key, int $seconds = 0): int
     {
-        return RedisUtil::wrap($this->connection->exists(...), $key, $seconds);
+        return RedisUtil::wrap($this->connection->expire(...), $key, $seconds);
     }
 
     /**
