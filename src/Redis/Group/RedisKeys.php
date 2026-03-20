@@ -237,7 +237,9 @@ trait RedisKeys
      */
     public function pttl(string $key): ?int
     {
-        return RedisUtil::wrap($this->connection->pttl(...), $key) ?: null;
+        $result = RedisUtil::wrap($this->connection->pttl(...), $key);
+
+        return $result === false ? null : $result;
     }
 
     /**
