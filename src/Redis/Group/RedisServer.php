@@ -6,6 +6,7 @@ namespace Raxos\Cache\Redis\Group;
 use Raxos\Cache\Redis\RedisUtil;
 use Raxos\Contract\Cache\RedisCacheExceptionInterface;
 use Redis;
+use function count;
 
 /**
  * Trait RedisServer
@@ -31,6 +32,24 @@ trait RedisServer
     public function flushAll(): bool
     {
         return RedisUtil::wrap($this->connection->flushAll(...));
+    }
+
+    /**
+     * Evaluates a Lua script on the server.
+     *
+     * @param string $script
+     * @param array $keys
+     * @param array $args
+     *
+     * @return mixed
+     * @throws RedisCacheExceptionInterface
+     * @author Bas Milius <bas@mili.us>
+     * @since 2.1.0
+     * @see Redis::eval()
+     */
+    public function eval(string $script, array $keys = [], array $args = []): mixed
+    {
+        return RedisUtil::wrap($this->connection->eval(...), $script, [...$keys, ...$args], count($keys));
     }
 
     /**

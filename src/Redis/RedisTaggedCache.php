@@ -172,12 +172,11 @@ readonly class RedisTaggedCache implements RedisTaggedCacheInterface
             $tagKey = $this->keyRaw('tag', $tag, 'keys');
             $setTtl = max($this->redis->ttl($tagKey), $ttl);
 
-            if ($setTtl < 0) {
-                $setTtl = null;
-            }
-
             $this->redis->sadd($tagKey, $key);
-            $this->redis->expire($tagKey, $setTtl);
+
+            if ($setTtl > 0) {
+                $this->redis->expire($tagKey, $setTtl);
+            }
         }
     }
 
