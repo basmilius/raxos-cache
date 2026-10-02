@@ -81,12 +81,14 @@ trait RedisStrings
      * @return int
      * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
-     * @since 1.0.0
+     * @since 3.2.0
      * @see Redis::bitpos()
      */
     public function bitpos(string $key, int $bit, int $start = 0, ?int $end = null): int
     {
-        return RedisUtil::wrap($this->connection->bitpos(...), $key, $bit, $start, $end);
+        return $end === null
+            ? RedisUtil::wrap($this->connection->bitpos(...), $key, (bool)$bit, $start)
+            : RedisUtil::wrap($this->connection->bitpos(...), $key, (bool)$bit, $start, $end);
     }
 
     /**

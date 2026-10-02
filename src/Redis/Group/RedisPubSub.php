@@ -76,12 +76,12 @@ trait RedisPubSub
      *
      * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
-     * @since 1.0.0
+     * @since 3.2.0
      * @see Redis::punsubscribe()
      */
     public function punsubscribe(?array $patterns = null): void
     {
-        RedisUtil::wrap($this->connection->punsubscribe(...), $patterns);
+        RedisUtil::wrap($this->connection->punsubscribe(...), $patterns ?? []);
     }
 
     /**
@@ -107,12 +107,12 @@ trait RedisPubSub
      *
      * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
-     * @since 1.0.0
+     * @since 3.2.0
      * @see Redis::unsubscribe()
      */
     public function unsubscribe(?array $channels = null): void
     {
-        RedisUtil::wrap($this->connection->unsubscribe(...), $channels);
+        RedisUtil::wrap($this->connection->unsubscribe(...), $channels ?? []);
     }
 
 }

@@ -318,12 +318,12 @@ trait RedisKeys
      * @return array
      * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
-     * @since 1.0.0
+     * @since 3.2.0
      * @see Redis::sort()
      */
     public function sort(string $key, ?array $options = null): array
     {
-        return RedisUtil::wrap($this->connection->sort(...), $key, $options);
+        return RedisUtil::wrap($this->connection->sort(...), $key, $options ?? []);
     }
 
     /**
@@ -334,12 +334,12 @@ trait RedisKeys
      * @return bool
      * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
-     * @since 1.0.0
+     * @since 3.2.0
      * @see Redis::rawCommand()
      */
     public function touch(string ...$keys): bool
     {
-        return RedisUtil::wrap($this->connection->rawCommand(...), 'TOUCH', $keys) > 0;
+        return RedisUtil::wrap($this->connection->rawCommand(...), 'TOUCH', ...$keys) > 0;
     }
 
     /**
