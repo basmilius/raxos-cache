@@ -286,7 +286,7 @@ trait RedisStrings
      */
     public function msetnx(array $sets): bool
     {
-        return RedisUtil::wrap($this->connection->msetnx(...), $sets) === 1;
+        return (bool)RedisUtil::wrap($this->connection->msetnx(...), $sets);
     }
 
     /**

@@ -6,7 +6,6 @@ namespace Raxos\Cache\Redis;
 use Raxos\Cache\Redis\Error\RedisCommandFailedException;
 use Raxos\Contract\Cache\{RedisCacheExceptionInterface, RedisCacheInterface, RedisTaggedCacheInterface};
 use function array_map;
-use function array_merge;
 use function array_unshift;
 use function implode;
 use function max;
@@ -87,16 +86,24 @@ readonly class RedisTaggedCache implements RedisTaggedCacheInterface
      */
     public function flush(): void
     {
-        $remove = array_merge(...array_map(function (string $tag): array {
+        foreach ($this->tags as $tag) {
             $tagKey = $this->keyRaw('tag', $tag, 'keys');
-            $members = $this->redis->smembers($tagKey);
-            $members[] = $tagKey;
 
-            return $members;
-        }, $this->tags));
-
-        foreach ($remove as $key) {
-            $this->redis->del($key);
+            // Pop and delete together so an interrupted flush cannot orphan an index entry.
+            do {
+                $removed = $this->redis->eval(
+                    <<<'LUA'
+                    local members = redis.call('SPOP', KEYS[1], 500)
+                    if #members > 0 then
+                        redis.call('DEL', unpack(members))
+                    else
+                        redis.call('DEL', KEYS[1])
+                    end
+                    return #members
+                    LUA,
+                    [$tagKey]
+                );
+            } while ($removed > 0);
         }
     }
 

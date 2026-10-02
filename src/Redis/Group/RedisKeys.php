@@ -81,7 +81,7 @@ trait RedisKeys
      */
     public function expire(string $key, int $seconds = 0): int
     {
-        return RedisUtil::wrap($this->connection->expire(...), $key, $seconds);
+        return (int)RedisUtil::wrap($this->connection->expire(...), $key, $seconds);
     }
 
     /**
@@ -219,7 +219,7 @@ trait RedisKeys
      * @since 1.0.0
      * @see Redis::pExpireAt()
      */
-    public function pexpireat(string $key, $unixTimestampMs): bool
+    public function pexpireat(string $key, int $unixTimestampMs): bool
     {
         return RedisUtil::wrap($this->connection->pExpireAt(...), $key, $unixTimestampMs);
     }
