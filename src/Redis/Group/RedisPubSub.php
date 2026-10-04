@@ -18,7 +18,6 @@ use Redis;
  */
 trait RedisPubSub
 {
-
     /**
      * Subscribe to channels that match the given patterns.
      *
@@ -30,7 +29,10 @@ trait RedisPubSub
      * @since 1.0.0
      * @see Redis::psubscribe()
      */
-    public function psubscribe(array $patterns, callable $fn): void
+    public function psubscribe(
+        array $patterns,
+        callable $fn
+    ): void
     {
         RedisUtil::wrap($this->connection->psubscribe(...), $patterns, $fn);
     }
@@ -47,7 +49,10 @@ trait RedisPubSub
      * @since 1.0.0
      * @see Redis::publish()
      */
-    public function publish(string $channel, string $message): int
+    public function publish(
+        string $channel,
+        string $message
+    ): int
     {
         return RedisUtil::wrap($this->connection->publish(...), $channel, $message);
     }
@@ -64,7 +69,10 @@ trait RedisPubSub
      * @since 1.0.0
      * @see Redis::pubsub()
      */
-    public function pubsub(string $keyword, string|array $argument): array|int
+    public function pubsub(
+        string $keyword,
+        string|array $argument
+    ): array|int
     {
         return RedisUtil::wrap($this->connection->pubsub(...), $keyword, $argument);
     }
@@ -76,7 +84,7 @@ trait RedisPubSub
      *
      * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
-     * @since 3.2.0
+     * @since 1.0.0
      * @see Redis::punsubscribe()
      */
     public function punsubscribe(?array $patterns = null): void
@@ -95,7 +103,10 @@ trait RedisPubSub
      * @since 1.0.0
      * @see Redis::subscribe()
      */
-    public function subscribe(array $channels, callable $fn): void
+    public function subscribe(
+        array $channels,
+        callable $fn
+    ): void
     {
         RedisUtil::wrap($this->connection->subscribe(...), $channels, $fn);
     }
@@ -107,12 +118,11 @@ trait RedisPubSub
      *
      * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
-     * @since 3.2.0
+     * @since 1.0.0
      * @see Redis::unsubscribe()
      */
     public function unsubscribe(?array $channels = null): void
     {
         RedisUtil::wrap($this->connection->unsubscribe(...), $channels ?? []);
     }
-
 }

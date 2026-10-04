@@ -19,7 +19,7 @@ A Redis client with typed command wrappers, cached computations and invalidation
 Requires PHP 8.5 or later. Enable the `redis` PHP extension. Composer checks the remaining package and extension dependencies declared in [composer.json](composer.json).
 
 ```sh
-composer require "raxos/cache:^3.2"
+composer require "raxos/cache:^3.3"
 ```
 
 ## Usage
@@ -64,3 +64,5 @@ See [Testing Raxos](https://github.com/basmilius/raxos/blob/main/TESTING.md) for
 ## License
 
 [MIT](LICENSE). Copyright (c) 2017 - present Bas Milius.
+
+See [lookups and cached computation](https://raxos.dev/cache/lookups-and-locks) for the optional APIs and their lifetime or transport guarantees.

@@ -18,7 +18,6 @@ use Redis;
  */
 trait RedisKeys
 {
-
     /**
      * Delete one or more keys.
      *
@@ -79,7 +78,10 @@ trait RedisKeys
      * @since 1.0.0
      * @see Redis::expire()
      */
-    public function expire(string $key, int $seconds = 0): int
+    public function expire(
+        string $key,
+        int $seconds = 0
+    ): int
     {
         return (int)RedisUtil::wrap($this->connection->expire(...), $key, $seconds);
     }
@@ -96,7 +98,10 @@ trait RedisKeys
      * @since 1.0.0
      * @see Redis::expireAt()
      */
-    public function expireAt(string $key, int $unixTimestamp): bool
+    public function expireAt(
+        string $key,
+        int $unixTimestamp
+    ): bool
     {
         return RedisUtil::wrap($this->connection->expireAt(...), $key, $unixTimestamp);
     }
@@ -135,7 +140,15 @@ trait RedisKeys
      * @since 1.0.0
      * @see Redis::migrate()
      */
-    public function migrate(string $host, int $port, string $key, int $database, float $timeout, bool $copy = false, bool $replace = false): bool
+    public function migrate(
+        string $host,
+        int $port,
+        string $key,
+        int $database,
+        float $timeout,
+        bool $copy = false,
+        bool $replace = false
+    ): bool
     {
         return RedisUtil::wrap($this->connection->migrate(...), $host, $port, $key, $database, $timeout, $copy, $replace);
     }
@@ -152,7 +165,10 @@ trait RedisKeys
      * @since 1.0.0
      * @see Redis::move()
      */
-    public function move(string $key, int $database): bool
+    public function move(
+        string $key,
+        int $database
+    ): bool
     {
         return RedisUtil::wrap($this->connection->move(...), $key, $database);
     }
@@ -169,7 +185,10 @@ trait RedisKeys
      * @since 1.0.0
      * @see Redis::object()
      */
-    public function object(string $command, string $key): bool|int|string
+    public function object(
+        string $command,
+        string $key
+    ): bool|int|string
     {
         return RedisUtil::wrap($this->connection->object(...), $command, $key);
     }
@@ -202,7 +221,10 @@ trait RedisKeys
      * @since 1.0.0
      * @see Redis::pExpire()
      */
-    public function pexpire(string $key, int $milliseconds): bool
+    public function pexpire(
+        string $key,
+        int $milliseconds
+    ): bool
     {
         return RedisUtil::wrap($this->connection->pExpire(...), $key, $milliseconds);
     }
@@ -219,7 +241,10 @@ trait RedisKeys
      * @since 1.0.0
      * @see Redis::pExpireAt()
      */
-    public function pexpireat(string $key, int $unixTimestampMs): bool
+    public function pexpireat(
+        string $key,
+        int $unixTimestampMs
+    ): bool
     {
         return RedisUtil::wrap($this->connection->pExpireAt(...), $key, $unixTimestampMs);
     }
@@ -268,7 +293,10 @@ trait RedisKeys
      * @since 1.0.0
      * @see Redis::rename()
      */
-    public function rename(string $key, string $newKey): bool
+    public function rename(
+        string $key,
+        string $newKey
+    ): bool
     {
         return RedisUtil::wrap($this->connection->rename(...), $key, $newKey);
     }
@@ -285,7 +313,10 @@ trait RedisKeys
      * @since 1.0.0
      * @see Redis::renameNx()
      */
-    public function renamenx(string $key, string $newKey): bool
+    public function renamenx(
+        string $key,
+        string $newKey
+    ): bool
     {
         return RedisUtil::wrap($this->connection->renameNx(...), $key, $newKey);
     }
@@ -304,7 +335,11 @@ trait RedisKeys
      * @since 1.0.0
      * @see Redis::restore()
      */
-    public function restore(string $key, int $ttl, string $serialized): bool
+    public function restore(
+        string $key,
+        int $ttl,
+        string $serialized
+    ): bool
     {
         return RedisUtil::wrap($this->connection->restore(...), $key, $ttl, $serialized);
     }
@@ -318,10 +353,13 @@ trait RedisKeys
      * @return array
      * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
-     * @since 3.2.0
+     * @since 1.0.0
      * @see Redis::sort()
      */
-    public function sort(string $key, ?array $options = null): array
+    public function sort(
+        string $key,
+        ?array $options = null
+    ): array
     {
         return RedisUtil::wrap($this->connection->sort(...), $key, $options ?? []);
     }
@@ -334,7 +372,7 @@ trait RedisKeys
      * @return bool
      * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
-     * @since 3.2.0
+     * @since 1.0.0
      * @see Redis::rawCommand()
      */
     public function touch(string ...$keys): bool
@@ -404,9 +442,11 @@ trait RedisKeys
      * @since 1.0.0
      * @see Redis::wait()
      */
-    public function wait(int $replicas, int $timeout): int
+    public function wait(
+        int $replicas,
+        int $timeout
+    ): int
     {
         return RedisUtil::wrap($this->connection->wait(...), $replicas, $timeout);
     }
-
 }

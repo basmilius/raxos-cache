@@ -18,7 +18,6 @@ use Redis;
  */
 trait RedisStrings
 {
-
     /**
      * Appends the given value to the specified key.
      *
@@ -31,7 +30,10 @@ trait RedisStrings
      * @since 1.0.0
      * @see Redis::append()
      */
-    public function append(string $key, mixed $value): int
+    public function append(
+        string $key,
+        mixed $value
+    ): int
     {
         return RedisUtil::wrap($this->connection->append(...), $key, $value);
     }
@@ -65,7 +67,11 @@ trait RedisStrings
      * @since 1.0.0
      * @see Redis::bitOp()
      */
-    public function bitop(string $operation, string $destinationKey, string ...$keys): int
+    public function bitop(
+        string $operation,
+        string $destinationKey,
+        string ...$keys
+    ): int
     {
         return RedisUtil::wrap($this->connection->bitOp(...), $operation, $destinationKey, ...$keys);
     }
@@ -81,10 +87,15 @@ trait RedisStrings
      * @return int
      * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
-     * @since 3.2.0
+     * @since 1.0.0
      * @see Redis::bitpos()
      */
-    public function bitpos(string $key, int $bit, int $start = 0, ?int $end = null): int
+    public function bitpos(
+        string $key,
+        int $bit,
+        int $start = 0,
+        ?int $end = null
+    ): int
     {
         return $end === null
             ? RedisUtil::wrap($this->connection->bitpos(...), $key, (bool)$bit, $start)
@@ -119,7 +130,10 @@ trait RedisStrings
      * @since 1.0.0
      * @see Redis::decrBy()
      */
-    public function decrby(string $key, int $amount): int
+    public function decrby(
+        string $key,
+        int $amount
+    ): int
     {
         return RedisUtil::wrap($this->connection->decrBy(...), $key, $amount);
     }
@@ -153,7 +167,10 @@ trait RedisStrings
      * @since 1.0.0
      * @see Redis::getBit()
      */
-    public function getbit(string $key, int $offset): int
+    public function getbit(
+        string $key,
+        int $offset
+    ): int
     {
         return RedisUtil::wrap($this->connection->getBit(...), $key, $offset);
     }
@@ -171,7 +188,11 @@ trait RedisStrings
      * @since 1.0.0
      * @see Redis::getRange()
      */
-    public function getrange(string $key, int $start, int $end): string
+    public function getrange(
+        string $key,
+        int $start,
+        int $end
+    ): string
     {
         return RedisUtil::wrap($this->connection->getRange(...), $key, $start, $end);
     }
@@ -188,7 +209,10 @@ trait RedisStrings
      * @since 1.0.0
      * @see Redis::getSet()
      */
-    public function getset(string $key, mixed $value): mixed
+    public function getset(
+        string $key,
+        mixed $value
+    ): mixed
     {
         return RedisUtil::wrap($this->connection->getSet(...), $key, $value);
     }
@@ -221,7 +245,10 @@ trait RedisStrings
      * @since 1.0.0
      * @see Redis::incrBy()
      */
-    public function incrby(string $key, int $amount): int
+    public function incrby(
+        string $key,
+        int $amount
+    ): int
     {
         return RedisUtil::wrap($this->connection->incrBy(...), $key, $amount);
     }
@@ -238,7 +265,10 @@ trait RedisStrings
      * @since 1.0.0
      * @see Redis::incrByFloat()
      */
-    public function incrbyfloat(string $key, float $amount): float
+    public function incrbyfloat(
+        string $key,
+        float $amount
+    ): float
     {
         return RedisUtil::wrap($this->connection->incrByFloat(...), $key, $amount);
     }
@@ -304,7 +334,11 @@ trait RedisStrings
      * @since 1.0.0
      * @see Redis::psetex()
      */
-    public function psetex(string $key, mixed $value, int $ttl): bool
+    public function psetex(
+        string $key,
+        mixed $value,
+        int $ttl
+    ): bool
     {
         return RedisUtil::wrap($this->connection->psetex(...), $key, $ttl, $value);
     }
@@ -321,7 +355,10 @@ trait RedisStrings
      * @since 1.0.0
      * @see Redis::set()
      */
-    public function set(string $key, mixed $value): bool
+    public function set(
+        string $key,
+        mixed $value
+    ): bool
     {
         return RedisUtil::wrap($this->connection->set(...), $key, $value);
     }
@@ -339,7 +376,11 @@ trait RedisStrings
      * @since 1.0.0
      * @see Redis::setBit()
      */
-    public function setbit(string $key, int $offset, bool $value): int
+    public function setbit(
+        string $key,
+        int $offset,
+        bool $value
+    ): int
     {
         return RedisUtil::wrap($this->connection->setBit(...), $key, $offset, $value);
     }
@@ -357,7 +398,11 @@ trait RedisStrings
      * @since 1.0.0
      * @see Redis::setex()
      */
-    public function setex(string $key, mixed $value, int $ttl): bool
+    public function setex(
+        string $key,
+        mixed $value,
+        int $ttl
+    ): bool
     {
         return RedisUtil::wrap($this->connection->setex(...), $key, $ttl, $value);
     }
@@ -374,7 +419,10 @@ trait RedisStrings
      * @since 1.0.0
      * @see Redis::setnx()
      */
-    public function setnx(string $key, mixed $value): bool
+    public function setnx(
+        string $key,
+        mixed $value
+    ): bool
     {
         return RedisUtil::wrap($this->connection->setnx(...), $key, $value);
     }
@@ -392,7 +440,11 @@ trait RedisStrings
      * @since 1.0.0
      * @see Redis::setRange()
      */
-    public function setrange(string $key, int $offset, string $value): int
+    public function setrange(
+        string $key,
+        int $offset,
+        string $value
+    ): int
     {
         return RedisUtil::wrap($this->connection->setRange(...), $key, $offset, $value);
     }
@@ -412,5 +464,4 @@ trait RedisStrings
     {
         return RedisUtil::wrap($this->connection->strlen(...), $key);
     }
-
 }

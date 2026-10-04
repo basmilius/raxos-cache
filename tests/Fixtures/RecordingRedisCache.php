@@ -12,7 +12,11 @@ final class RecordingRedisCache extends RedisCache
     public function eval(string $script, array $keys = [], array $args = []): mixed
     {
         $result = parent::eval($script, $keys, $args);
-        $this->batches[] = $result;
+
+        if (str_contains($script, 'SPOP')) {
+            $this->batches[] = $result;
+        }
+
         return $result;
     }
 }
