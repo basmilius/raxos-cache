@@ -15,6 +15,7 @@ namespace Raxos\Cache\Redis;
  */
 final readonly class CacheEntry
 {
+
     /**
      * Preserves the distinction between a cache miss and a cached null or false value.
      *
@@ -28,4 +29,5 @@ final readonly class CacheEntry
         public bool $found,
         public mixed $value = null
     ) {}
+
 }

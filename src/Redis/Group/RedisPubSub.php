@@ -18,6 +18,7 @@ use Redis;
  */
 trait RedisPubSub
 {
+
     /**
      * Subscribe to channels that match the given patterns.
      *
@@ -125,4 +126,5 @@ trait RedisPubSub
     {
         RedisUtil::wrap($this->connection->unsubscribe(...), $channels ?? []);
     }
+
 }

@@ -18,6 +18,7 @@ use Redis;
  */
 trait RedisKeys
 {
+
     /**
      * Delete one or more keys.
      *
@@ -449,4 +450,5 @@ trait RedisKeys
     {
         return RedisUtil::wrap($this->connection->wait(...), $replicas, $timeout);
     }
+
 }

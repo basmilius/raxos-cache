@@ -104,6 +104,7 @@ it('computes one value for overlapping independent processes', function (): void
 it('preserves a factory failure and still releases the lease if staging cleanup fails', function (): void {
     withRedisUnit(function (RedisCache $cache, string $prefix): void {
         $writer = new class($prefix, $cache->host, $cache->port) extends RedisCache {
+
             public function del(string ...$keys): bool
             {
                 if (str_contains($keys[0], ':pending:')) {
@@ -112,6 +113,7 @@ it('preserves a factory failure and still releases the lease if staging cleanup 
 
                 return parent::del(...$keys);
             }
+
         };
         expect(fn() => $writer->rememberLocked($prefix . ':failure', 60, static fn(): never => throw new LogicException('factory')))->toThrow(LogicException::class, 'factory');
         expect($cache->keys($prefix . ':lock:*'))->toBe([]);

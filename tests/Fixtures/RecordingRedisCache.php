@@ -7,6 +7,7 @@ use Raxos\Cache\Redis\RedisCache;
 
 final class RecordingRedisCache extends RedisCache
 {
+
     public array $batches = [];
 
     public function eval(string $script, array $keys = [], array $args = []): mixed
@@ -19,4 +20,5 @@ final class RecordingRedisCache extends RedisCache
 
         return $result;
     }
+
 }

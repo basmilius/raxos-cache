@@ -38,6 +38,7 @@ it('publishes serializer output atomically with membership after an overlapping 
     withRedisUnit(function (RedisCache $cache, string $prefix): void {
         $other = new RedisCache($prefix, $cache->host, $cache->port);
         $writer = new class($prefix, $cache->host, $cache->port) extends RedisCache {
+
             public ?Closure $afterStage = null;
 
             public function setex(string $key, mixed $value, int $ttl): bool
@@ -54,6 +55,7 @@ it('publishes serializer output atomically with membership after an overlapping 
 
                 return $value === false ? false : json_decode($value, true, flags: JSON_THROW_ON_ERROR);
             }
+
         };
         $writer->afterStage = static fn() => $other->tags(['catalog'])->flush();
         $tagged = $writer->tags(['catalog']);

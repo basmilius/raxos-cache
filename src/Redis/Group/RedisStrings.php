@@ -18,6 +18,7 @@ use Redis;
  */
 trait RedisStrings
 {
+
     /**
      * Appends the given value to the specified key.
      *
@@ -464,4 +465,5 @@ trait RedisStrings
     {
         return RedisUtil::wrap($this->connection->strlen(...), $key);
     }
+
 }

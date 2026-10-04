@@ -26,6 +26,7 @@ use function sha1;
  */
 readonly class RedisTaggedCache implements RedisTaggedCacheInterface
 {
+
     /**
      * Namespaces tag indexes independently from the keys stored in this cache.
      *
@@ -71,6 +72,7 @@ readonly class RedisTaggedCache implements RedisTaggedCacheInterface
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
@@ -81,6 +83,7 @@ readonly class RedisTaggedCache implements RedisTaggedCacheInterface
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
@@ -93,6 +96,7 @@ readonly class RedisTaggedCache implements RedisTaggedCacheInterface
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
@@ -105,6 +109,7 @@ readonly class RedisTaggedCache implements RedisTaggedCacheInterface
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
@@ -133,6 +138,7 @@ readonly class RedisTaggedCache implements RedisTaggedCacheInterface
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
@@ -161,6 +167,7 @@ readonly class RedisTaggedCache implements RedisTaggedCacheInterface
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
@@ -187,6 +194,7 @@ readonly class RedisTaggedCache implements RedisTaggedCacheInterface
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
@@ -237,4 +245,5 @@ readonly class RedisTaggedCache implements RedisTaggedCacheInterface
             $this->redis->del($pending);
         }
     }
+
 }

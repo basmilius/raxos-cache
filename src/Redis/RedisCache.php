@@ -102,6 +102,7 @@ class RedisCache implements RedisCacheInterface
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
@@ -112,6 +113,7 @@ class RedisCache implements RedisCacheInterface
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.6
      */
@@ -122,6 +124,7 @@ class RedisCache implements RedisCacheInterface
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
@@ -132,6 +135,7 @@ class RedisCache implements RedisCacheInterface
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
@@ -346,6 +350,7 @@ class RedisCache implements RedisCacheInterface
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
@@ -358,6 +363,7 @@ class RedisCache implements RedisCacheInterface
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
@@ -365,4 +371,5 @@ class RedisCache implements RedisCacheInterface
     {
         return new RedisTaggedCache($this, $tags);
     }
+
 }
