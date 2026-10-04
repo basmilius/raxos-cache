@@ -156,6 +156,7 @@ class RedisCache implements RedisCacheInterface
      * Reads the native value and existence in one atomic snapshot. Custom get overrides use their existing read path.
      *
      * @param string $key
+     *
      * @return CacheEntry<mixed>
      * @throws RedisCacheExceptionInterface
      * @author Bas Milius <bas@mili.us>
@@ -188,6 +189,7 @@ class RedisCache implements RedisCacheInterface
      * @param callable():T $fn
      * @param int $lockTtl
      * @param float $waitTimeout
+     *
      * @return T
      * @throws RedisCacheExceptionInterface|Throwable
      * @author Bas Milius <bas@mili.us>
@@ -239,6 +241,7 @@ class RedisCache implements RedisCacheInterface
      * @param callable():T $fn
      * @param string $lock
      * @param string $owner
+     *
      * @return T
      * @throws RedisCacheExceptionInterface|Throwable
      * @author Bas Milius <bas@mili.us>
@@ -306,6 +309,7 @@ class RedisCache implements RedisCacheInterface
      * @param string $pending
      * @param string $lock
      * @param string $owner
+     *
      * @return void
      * @throws RedisCacheExceptionInterface|Throwable
      * @author Bas Milius <bas@mili.us>

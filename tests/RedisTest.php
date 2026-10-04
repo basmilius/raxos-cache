@@ -55,6 +55,7 @@ it('retains cached zero and false values without invoking the factory twice', fu
     $calls = 0;
     $factory = static function () use (&$calls): string {
         ++$calls;
+
         return '0';
     };
     expect($this->redis->remember($key, 60, $factory))->toBe('0')

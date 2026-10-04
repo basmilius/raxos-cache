@@ -20,13 +20,12 @@ final readonly class CacheEntry
      *
      * @param bool $found
      * @param T $value
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 3.3.0
      */
     public function __construct(
         public bool $found,
         public mixed $value = null
-    )
-    {
-    }
+    ) {}
 }

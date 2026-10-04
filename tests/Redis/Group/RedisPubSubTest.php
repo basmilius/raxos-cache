@@ -7,8 +7,7 @@ use RaxosTests\Cache\UnitRedisCache;
 covers(RedisPubSub::class);
 
 it('forwards subscription patterns and preserves callback identity', function (): void {
-    $callback = static function (Redis $connection, string $channel, string $payload): void {
-    };
+    $callback = static function (Redis $connection, string $channel, string $payload): void {};
     $redis = test()->createMock(Redis::class);
     $redis->expects(test()->once())->method('psubscribe')->with(['unit:*'], $callback)->willReturn(true);
     $redis->expects(test()->once())->method('subscribe')->with(['unit'], $callback)->willReturn(true);

@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 use Raxos\Cache\Redis\RedisCache;
 
 if (realpath($_SERVER['SCRIPT_FILENAME'] ?? '') !== __FILE__) {
